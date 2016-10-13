@@ -1,0 +1,16 @@
+<apex:page controller="examplecon">
+<apex:form >
+
+<apex:outputPanel id="counter">
+
+    <apex:outputText value="Click Here {!count}"/>
+        
+        <apex:actionSupport event="onclick" action="{!incrementcounter}" reRender="counter"/>    
+  
+</apex:outputPanel>
+
+        
+
+</apex:form>
+
+</apex:page>

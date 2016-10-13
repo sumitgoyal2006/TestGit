@@ -1,0 +1,23 @@
+<apex:page standardController="Account" tabStyle="Account">
+ 
+ <apex:tabPanel >
+ 
+ <apex:tab label="Account Details" >
+ <apex:detail relatedList="false"/> 
+ </apex:tab>
+ 
+ <apex:tab label="Contacts">
+ <apex:relatedList subject="{!Account}" list="Contacts"/>
+ 
+ </apex:tab>
+ 
+ 
+ <apex:tab label="Opportunities">
+ <apex:relatedList subject="{!Account}" list="Opportunities"/>
+ 
+ </apex:tab>
+ 
+ </apex:tabPanel>
+ 
+ 
+</apex:page>

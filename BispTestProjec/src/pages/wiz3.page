@@ -1,0 +1,6 @@
+<apex:page controller="wiz3">
+  
+  <apex:outputField value="{!account.name}"/>
+  <apex:outputField value="{!account.phone}"/>
+  
+</apex:page>

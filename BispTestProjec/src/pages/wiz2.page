@@ -1,0 +1,12 @@
+<apex:page controller="wiz2">
+
+<apex:form >
+<apex:pageBlock title="Account Information">
+<apex:pageBlockSection >
+<apex:outputField value="{!account.name}"/>
+<apex:inputField value="{!account.phone}"/>
+</apex:pageBlockSection>
+<apex:commandButton value="Update" action="{!save}"/>
+</apex:pageBlock>
+    </apex:form>
+  </apex:page>

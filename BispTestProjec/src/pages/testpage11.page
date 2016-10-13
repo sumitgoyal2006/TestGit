@@ -1,0 +1,15 @@
+<apex:page > 
+ <apex:form >
+ <apex:pageBlock title="Time Render"> 
+ <apex:commandButton value="Roll over to Refresh"> 
+     <apex:actionSupport event="onclick" reRender="time" />
+     </apex:commandButton>     
+     <apex:outputPanel id="time">
+         <apex:outputText value="{!now()}"></apex:outputText>
+         <br></br>
+          <apex:outputText value="{!now()}"></apex:outputText>
+     </apex:outputPanel>
+    
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

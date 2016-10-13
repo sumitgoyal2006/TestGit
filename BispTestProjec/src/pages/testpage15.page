@@ -1,0 +1,8 @@
+<apex:page >
+
+
+    <flow:interview name="accountcreation"></flow:interview>
+
+
+ 
+</apex:page>

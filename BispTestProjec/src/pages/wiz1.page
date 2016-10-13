@@ -1,0 +1,13 @@
+<apex:page controller="wiz1" >
+ 
+ <apex:form >
+<apex:pageBlock title="Account Information">
+<apex:pageBlockSection >
+<apex:inputField value="{!account.name}"/>
+</apex:pageBlockSection>
+<apex:commandButton value="Save" action="{!save}"/>
+</apex:pageBlock>
+    </apex:form>
+ 
+ 
+</apex:page>

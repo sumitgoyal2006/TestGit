@@ -1,0 +1,51 @@
+<apex:page id="pg" controller="PopupScreenController">
+    <apex:form id="frm">
+        <apex:pageBlock title="PopUp" id="pb">
+            <apex:pagemessages id="msg"/>
+            <apex:commandButton value="Show Screen" onclick="opnePopup();" Oncomplete="refresh"/>            
+                <script type="text/javascript">
+                    var PopupBox;
+                    var strreason;
+                    var strcomment;
+                    PopupBox  = new SimpleDialog("test",false);
+                    PopupBox.createDialog();
+                    function opnePopup()
+                    {
+                        PopupBox.setTitle("PopUp Example");
+                        PopupBox.importContentNode(document.getElementById("{!$Component.PopupBox}"));
+                        PopupBox.show();                        
+                    }                    
+                    function callreason(res)  { strreason = res; }
+                    function callcomment(cmnt) { strcomment = cmnt; }                     
+                     function checkreason()                    {
+                         if(strreason.length>0 && strcomment.length>0)
+                         {
+                             submitStandardPopup('Rejected',strcomment,strreason);
+                             PopupBox.hide();  
+                         }
+                         else
+                         {
+                             alert("Please Select reason or Enter comment");
+                         }
+                     }                    
+                    </script>                    
+                    <apex:outputPanel style="display:none">
+                         <apex:outputPanel id="PopupBox" layout="block">
+                            <b> Reason &nbsp;&nbsp;&nbsp;&nbsp;</b>
+                            <apex:inputText id="reason" value="{!textReason}" onchange="callreason(this.value);" style="width:100%"/> <br/><br/>
+                            <b>Commment</b>                            
+                             <apex:inputText id="comment" value="{!textComment}" 
+                             onchange="callcomment(this.value);"
+                              onblur="callcomment(this.value);" style="height:100px; width:100%"/> <br/><br/>
+                             <center><apex:commandButton value="OK" onClick="checkreason();"/>                             
+                             <apex:commandButton value="Cancel" onclick="PopupBox.hide();"/>
+                             </center>                             
+                        </apex:outputPanel>                    
+                    </apex:outputPanel>                    
+                    <apex:actionFunction name="submitStandardPopup" action="{!submitStandardPopup}" reRender="msg">
+                    <apex:param name="status" value=""/>
+                    <apex:param name="comment" value=""/>
+                    <apex:param name="reason" value=""/> </apex:actionFunction>        
+        </apex:pageBlock>  
+        </apex:form>  
+</apex:page>

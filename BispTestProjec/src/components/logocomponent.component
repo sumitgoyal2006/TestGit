@@ -1,0 +1,6 @@
+<apex:component >
+ <apex:image value="{!$Resource.image1}"/>
+  <apex:image value="{!$Resource.image1}"/>
+  <apex:image value="{!$Resource.image1}"/>
+ 
+</apex:component>

@@ -1,0 +1,19 @@
+<apex:page standardController="Opportunity" recordSetVar="tempoppo">
+<apex:form >
+<apex:pageBlock title="Opportunity Records">
+        <apex:pageblockTable value="{!tempoppo}" var="opp">
+            
+            <apex:column value="{!opp.name}"/>
+            <apex:column headerValue="Amount">
+                <apex:inputField value="{!opp.amount}" />
+            </apex:column>
+            <apex:column value="{!opp.StageName}"/>          
+        
+        </apex:pageblockTable>
+        <apex:commandLink value="Previous" action="{!previous}"/>&nbsp;&nbsp;&nbsp;&nbsp;
+        <apex:commandLink value="Next" action="{!next}"/>
+        <apex:commandButton value="Save" action="{!save}"/>
+        
+</apex:pageBlock>
+</apex:form>
+</apex:page>

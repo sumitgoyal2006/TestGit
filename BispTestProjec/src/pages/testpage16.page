@@ -1,0 +1,6 @@
+<apex:page >
+ 
+ <c:logocomponent />
+ 
+ 
+</apex:page>

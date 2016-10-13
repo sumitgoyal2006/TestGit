@@ -1,0 +1,16 @@
+<apex:page controller="newlogin">
+  
+  <apex:form >
+  
+      Username:<apex:inputText value="{!name}"/>
+        Password:<apex:inputSecret value="{!password}"/>
+        
+        <apex:commandButton value="Login" action="{!login}"/>
+      
+  
+  
+  </apex:form>
+  
+  
+  
+</apex:page>

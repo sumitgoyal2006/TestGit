@@ -1,0 +1,25 @@
+<apex:page standardController="Account"  recordSetVar="Accounts">
+ 
+ <style>
+     .color1{background-color:red;}
+      .color2{background-color:yellow;}
+       .color3{background-color:cyan;}
+     
+ </style>
+ 
+ <apex:form >
+ 
+     <apex:dataTable value="{!Accounts}" var="acc" border="2" rowClasses="color3,color2,color1" headerClass="color1">
+     
+     <apex:column value="{!acc.name}" headerValue="Account Name"/>
+      <apex:column value="{!acc.phone}" headerValue="Phone"/>
+       <apex:column value="{!acc.type}" headerValue="Account Type"/>
+     
+     </apex:dataTable>
+ 
+ </apex:form>
+ 
+ 
+ 
+ 
+</apex:page>

@@ -1,0 +1,10 @@
+<apex:page >
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js">
+</script>  
+ <script>
+      var app = angular.module('MyApp', []);
+  </script>
+  <div ng-app="MyApp">
+   <h1> My First Angular JS Application</h1>
+  </div>
+</apex:page>

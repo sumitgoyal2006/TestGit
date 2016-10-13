@@ -1,0 +1,20 @@
+<apex:page standardController="Account" extensions="ErrorMessage">
+ <apex:form >
+ 
+ <apex:pageblock title="Account Information"> 
+ 
+ <apex:pagemessages id="showmessage"></apex:pagemessages>
+    
+    <apex:panelGrid columns="2">
+    
+    Account Name <apex:inputField value="{!Account.name}"/>
+    Account Number <apex:inputtext value="{!accountname}"/>
+    <apex:commandButton value="Save" action="{!updateaccount}"/>
+    
+    </apex:panelGrid>
+ 
+ </apex:pageblock>
+ 
+ </apex:form>
+ 
+</apex:page>
