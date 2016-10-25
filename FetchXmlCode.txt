@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Crm.Sdk.Messages;
+using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Client;
+using System.ServiceModel.Description;
+using Microsoft.Xrm.Sdk.Query;
+
+
+namespace ConsoleApplication10
+{
+    class Program
+    {
+        static IOrganizationService _service;
+        static void Main(string[] args)
+        {
+            try
+            {
+
+                ConnectToMSCRM("sumitg@abc21102016.onmicrosoft.com", "Admin#12345", "https://abc21102016.api.crm4.dynamics.com/XRMServices/2011/Organization.svc");
+                Guid userid = ((WhoAmIResponse)_service.Execute(new WhoAmIRequest())).UserId;
+                if (userid != Guid.Empty)
+                {
+                    string fetchXmlString = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+                      <entity name='contact'>
+                        <attribute name='fullname' />
+                        <attribute name='telephone1' />
+                        <attribute name='contactid' />
+	                      <attribute name='parentcustomerid' />
+	                      <attribute name='birthdate' />
+                             <attribute name='birthdate' />
+                        <attribute name='creditlimit' />
+                             <attribute name='donotsendmm' />
+                        <order attribute='fullname' descending='false' />
+                        <filter type='and'>
+                          <condition attribute='fullname' operator='eq' value='Peter Paul' />
+                          <condition attribute='statecode' operator='eq' value='0' />
+                        </filter>
+                      </entity>
+                    </fetch>";
+
+
+
+                    EntityCollection ec = ExecuteFetch(fetchXmlString);
+                    Console.WriteLine("Record Exists\n");
+                    if (ec.Entities.Count > 0)
+                    {
+                        string output = string.Empty;
+                        foreach (var item in ec.Entities)
+                        {
+                            //String
+                            if (item.Attributes.Contains("fullname")) //Check for fullname value exists or not in Entity Collection
+                                output += "Full Name : " + item.Attributes["fullname"] + "\n";
+
+                            
+                                                        //Date
+                            if (item.Attributes.Contains("birthdate")) //Check for birthdate exists or not in Entity Collection
+                               output += "Birthday : " + ((DateTime)item.Attributes["birthdate"]).ToLocalTime().ToShortDateString().ToString() + "\n";
+
+
+                            if (item.Attributes.Contains("parentcustomerid")) //Check for parentcustomerid exists or not in Entity Collection
+                                output += "Company : " + ((EntityReference)item.Attributes["parentcustomerid"]).Name + "\n";
+
+                            if (item.Attributes.Contains("creditlimit")) //Check for creditlimit exists or not in Entity Collection
+                                output += "Credit Limit : " + ((Money)item.Attributes["creditlimit"]).Value + "\n";
+
+                            if (item.Attributes.Contains("donotsendmm")) //Check for donotsendmm exists or not in Entity Collection
+                                output += "Send Marketing Materials : Name - " + item.FormattedValues["donotsendmm"] + ", Value - " + ((Boolean)item.Attributes["donotsendmm"]).ToString();
+                           
+                            }
+
+                        Console.WriteLine(output);
+                        Console.ReadKey();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+               
+            
+        }
+
+             public static EntityCollection ExecuteFetch(string fetchXmlString)
+            {   
+            return _service.RetrieveMultiple(new FetchExpression(fetchXmlString));
+            }
+
+        public static void ConnectToMSCRM(string UserName, string Password, string SoapOrgServiceUri)
+        {
+            try
+            {
+                ClientCredentials credentials = new ClientCredentials();
+                credentials.UserName.UserName = UserName;
+                credentials.UserName.Password = Password;
+                Uri serviceUri = new Uri(SoapOrgServiceUri);
+                OrganizationServiceProxy proxy = new OrganizationServiceProxy(serviceUri, null, credentials, null);
+                proxy.EnableProxyTypes();
+                _service = (IOrganizationService)proxy;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error while connecting to CRM " + ex.Message);
+                Console.ReadKey();
+            }
+        }
+    }
+}
